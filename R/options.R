@@ -45,7 +45,7 @@ xAxis <- function(c3,
 #'  \item{text}{: character}
 #'  \item{position}{: character}
 #' }
-#' label position options for horixontal axis are:
+#' label position options for horizontal axis are:
 #' \itemize{
 #'  \item{inner-right}
 #'  \item{inner-center}
@@ -538,22 +538,40 @@ point_options <- function(c3,
                           expand = TRUE,
                           expand.r = 1.75,
                           select.r = 4) {
+    # add option for where r is a vector
+    if (length(r) > 1) {
 
-  point <- list(
-    show = show,
-    r = r,
-    focus = list(
-      expand = list(
-        enabled = expand,
-        r = r * expand.r
-      )
-    ),
-    select = list(
-      r = r * select.r
-    )
-  )
+        #stopifnot(length(r) == length(fromJSON(c3$x$data$json)))
 
-  c3$x$point <- point
+        js_func <- 'function(d) {
+                      var size = [%s]
+                      return (size[d.index]) * %s;
+                      }'
 
-  return(c3)
+        r <- JS(sprintf(js_func, paste(r, collapse = ','), 1)) # need better way to scale size
+
+        point <- list(
+            show = show,
+            r = r
+        )
+
+    } else {
+        point <- list(
+            show = show,
+            r = r,
+            focus = list(
+                expand = list(
+                    enabled = expand,
+                    r = r * expand.r
+                )
+            ),
+            select = list(
+                r = r * select.r
+            )
+        )
+    }
+
+    c3$x$point <- point
+
+    return(c3)
 }

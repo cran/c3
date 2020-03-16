@@ -23,12 +23,12 @@ c3(data, x = NULL, y = NULL, group = NULL, width = NULL,
 
 \item{axes}{list, use to assign plot elements to secondary y axis}
 
-\item{labels}{character or list with otpions:
+\item{labels}{character or list with options:
  \itemize{
  \item{format}{: list format functions for each parameter label (see \href{http://c3js.org/reference.html#data-labels}{c3 data-labels})}
 }}
 
-\item{hide}{booleen or character vector of parameters to hide}
+\item{hide}{boolean or character vector of parameters to hide}
 
 \item{onclick}{character js function, wrap character or character vector in JS()}
 
@@ -63,3 +63,4 @@ Other c3: \code{\link{RColorBrewer}}, \code{\link{grid}},
   \code{\link{subchart}}, \code{\link{tooltip}},
   \code{\link{xAxis}}, \code{\link{zoom}}
 }
+\concept{c3}

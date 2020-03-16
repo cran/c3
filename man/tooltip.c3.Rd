@@ -5,8 +5,8 @@
 \alias{tooltip.c3}
 \title{C3 Tooltips}
 \usage{
-tooltip(c3, show = TRUE, grouped = TRUE, format = NULL, position = NULL,
-  contents = NULL, ...)
+tooltip(c3, show = TRUE, grouped = TRUE, format = NULL,
+  position = NULL, contents = NULL, ...)
 
 \method{tooltip}{c3}(c3, show = TRUE, grouped = TRUE, format = NULL,
   position = NULL, contents = NULL, ...)
@@ -57,3 +57,5 @@ Other c3: \code{\link{RColorBrewer}}, \code{\link{c3}},
   \code{\link{region}}, \code{\link{subchart}},
   \code{\link{xAxis}}, \code{\link{zoom}}
 }
+\concept{c3}
+\concept{tooltip}

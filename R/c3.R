@@ -7,18 +7,18 @@
 #' @param group character column name
 #' @param width integer htmlwidget width (separate from plot width)
 #' @param height integer htmlwidget height (separate from plot height)
-#' @param labels character or list with otpions:
+#' @param labels character or list with options:
 #'  \itemize{
 #'  \item{format}{: list format functions for each parameter label (see \href{http://c3js.org/reference.html#data-labels}{c3 data-labels})}
 #' }
-#' @param hide booleen or character vector of parameters to hide
+#' @param hide boolean or character vector of parameters to hide
 #' @param onclick character js function, wrap character or character vector in JS()
 #' @param onmouseover character js function, wrap character or character vector in JS()
 #' @param onmouseout character js function, wrap character or character vector in JS()
 #' @param axes list, use to assign plot elements to secondary y axis
 #' @param ... addition options passed to the data object
 #' @importFrom utils modifyList
-#' @importFrom dplyr mutate select n group_by_
+#' @importFrom dplyr mutate select n group_by_at
 #' @importFrom data.table dcast setDT
 #' @importFrom stats formula
 #' @importFrom lazyeval interp
@@ -103,7 +103,7 @@ c3 <- function(data,
                      grep('numeric|integer', sapply(data, class)))]
 
     # define x axis type
-    dtype <- switch(class(data[,x]),
+    dtype <- switch(class(data[[x]]),
                    'Date' = 'timeseries',
                    'character' = 'category',
                    'numeric' = 'indexed')
@@ -122,7 +122,7 @@ c3 <- function(data,
     data <- data[, c(x,y)]
 
     # define x axis type
-    dtype <- switch(class(data[,x]),
+    dtype <- switch(class(data[[x]]),
                    'Date' = 'timeseries',
                    'character' = 'category',
                    'numeric' = 'indexed')
@@ -149,11 +149,9 @@ c3 <- function(data,
     # remove columns not in x,y,group
     data <- data[, c(x, y, group)]
 
-    groups <- as.character(unique(data[,group]))
+    groups <- as.character(unique(data[[group]]))
 
-    #flt_group <- interp(~(!is.na(var)), var = as.name(group))
-
-    tmp.df <- group_by_(data, interp(~var, var = as.name(group))) %>%
+    tmp.df <- group_by_at(data, group) %>%
       mutate(id = 1:n())
 
     # need to change columns to group, group_x in xs and in data dataframe

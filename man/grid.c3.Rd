@@ -7,7 +7,8 @@
 \usage{
 grid(c3, axis, show = TRUE, lines = NULL, ticks = NULL, ...)
 
-\method{grid}{c3}(c3, axis, show = TRUE, lines = NULL, ticks = NULL, ...)
+\method{grid}{c3}(c3, axis, show = TRUE, lines = NULL, ticks = NULL,
+  ...)
 }
 \arguments{
 \item{c3}{c3 htmlwidget object}
@@ -24,7 +25,7 @@ grid(c3, axis, show = TRUE, lines = NULL, ticks = NULL, ...)
  \item{position}{: character one of 'start', 'middle', 'end' (optional)}
 }}
 
-\item{ticks}{boolean placeholder. Not yet implimented in \href{http://c3js.org/reference.html#grid-y-ticks}{C3.js}}
+\item{ticks}{boolean placeholder. Not yet implemented in \href{http://c3js.org/reference.html#grid-y-ticks}{C3.js}}
 
 \item{...}{additional options passed to the grid object}
 }
@@ -49,3 +50,5 @@ Other c3: \code{\link{RColorBrewer}}, \code{\link{c3}},
   \code{\link{subchart}}, \code{\link{tooltip}},
   \code{\link{xAxis}}, \code{\link{zoom}}
 }
+\concept{c3}
+\concept{grid}

@@ -5,6 +5,10 @@ library(dplyr)
 
 ## ----install, eval=FALSE-------------------------------------------------
 #  
+#  install.packages('c3')
+#  
+#  # OR
+#  
 #  devtools::install_github("mrjoh3/c3")
 #  
 

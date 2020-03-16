@@ -6,7 +6,8 @@ context('main package')
 
 d <- data.frame(a = abs(rnorm(20) * 10),
                b = abs(rnorm(20) * 10),
-               date = seq(as.Date("2014-01-01"), by = "month", length.out = 20))
+               date = seq(as.Date("2014-01-01"), by = "month", length.out = 20),
+               stringsAsFactors = TRUE)
 
 d$c <- abs(rnorm(20) *10)
 d$d <- abs(rnorm(20) *10)
@@ -124,11 +125,13 @@ test_that('regions can be added', {
 
   reg <- region(cp, data.frame(axis = 'x',
                                start = 5,
-                               end = 12))
+                               end = 12,
+                               stringsAsFactors = TRUE))
 
   expect_error(region(cp, data.frame(axis = 'x',
                                start = 5,
-                               error = 4))
+                               error = 4,
+                               stringsAsFactors = TRUE))
                )
 
   expect_equal(reg$x$regions$start, 5)
@@ -219,5 +222,19 @@ test_that('zoom settings work', {
 
   expect_is(zm, "c3")
   expect_is(zm, "htmlwidget")
+
+})
+
+
+context('Tibble Compatibility')
+
+test_that('Tibble x axis can be defined', {
+
+  d <- dplyr::as_tibble(d)
+
+  cp <- c3(d, x = 'date')
+
+  expect_is(cp, "c3")
+  expect_is(cp, "htmlwidget")
 
 })
